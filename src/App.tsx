@@ -14,27 +14,28 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <LanguageProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<LanguageSelect />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/jobs" element={<JobList />} />
-            <Route path="/job/:id" element={<JobDetails />} />
-            <Route path="/post-job" element={<PostJob />} />
-            <Route path="/success" element={<Success />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </LanguageProvider>
-  </QueryClientProvider>
-);
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <LanguageProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<LanguageSelect />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/jobs" element={<JobList />} />
+              <Route path="/job/:id" element={<JobDetails />} />
+              <Route path="/post-job" element={<PostJob />} />
+              <Route path="/success" element={<Success />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </LanguageProvider>
+    </QueryClientProvider>
+  );
+}
 
 export default App;
