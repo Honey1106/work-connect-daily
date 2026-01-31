@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { jobTypes } from '@/data/mockJobs';
 import { JobIcon } from '@/components/JobIcon';
+import { VoiceInput } from '@/components/VoiceInput';
 import { ChevronLeft, MapPin, IndianRupee, Clock, ChevronDown } from 'lucide-react';
 
 export default function PostJob() {
@@ -22,6 +23,18 @@ export default function PostJob() {
     e.preventDefault();
     if (jobType && wage && location) {
       navigate('/success');
+    }
+  };
+
+  const handleVoiceLocation = (text: string) => {
+    setLocation(text);
+  };
+
+  const handleVoiceWage = (text: string) => {
+    // Extract numbers from voice input
+    const numbers = text.match(/\d+/g);
+    if (numbers && numbers.length > 0) {
+      setWage(numbers[0]);
     }
   };
 
@@ -93,21 +106,27 @@ export default function PostJob() {
             )}
           </div>
 
-          {/* Wage Input */}
+          {/* Wage Input with Voice */}
           <div>
             <label className="block text-sm font-medium text-muted-foreground mb-2">
               {t.wagePerDay}
             </label>
-            <div className="relative">
-              <div className="absolute left-4 top-1/2 -translate-y-1/2">
-                <IndianRupee className="w-5 h-5 text-muted-foreground" />
+            <div className="flex gap-2">
+              <div className="relative flex-1">
+                <div className="absolute left-4 top-1/2 -translate-y-1/2">
+                  <IndianRupee className="w-5 h-5 text-muted-foreground" />
+                </div>
+                <input
+                  type="number"
+                  value={wage}
+                  onChange={(e) => setWage(e.target.value)}
+                  placeholder={t.enterWage}
+                  className="w-full pl-12 pr-4 py-4 rounded-xl bg-card border border-border shadow-soft focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-lg"
+                />
               </div>
-              <input
-                type="number"
-                value={wage}
-                onChange={(e) => setWage(e.target.value)}
-                placeholder={t.enterWage}
-                className="w-full pl-12 pr-4 py-4 rounded-xl bg-card border border-border shadow-soft focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-lg"
+              <VoiceInput 
+                onResult={handleVoiceWage} 
+                placeholder={t.tapToSpeak}
               />
             </div>
           </div>
@@ -148,21 +167,27 @@ export default function PostJob() {
             </div>
           </div>
 
-          {/* Location Input */}
+          {/* Location Input with Voice */}
           <div>
             <label className="block text-sm font-medium text-muted-foreground mb-2">
               {t.location}
             </label>
-            <div className="relative">
-              <div className="absolute left-4 top-1/2 -translate-y-1/2">
-                <MapPin className="w-5 h-5 text-muted-foreground" />
+            <div className="flex gap-2">
+              <div className="relative flex-1">
+                <div className="absolute left-4 top-1/2 -translate-y-1/2">
+                  <MapPin className="w-5 h-5 text-muted-foreground" />
+                </div>
+                <input
+                  type="text"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  placeholder={t.enterLocation}
+                  className="w-full pl-12 pr-4 py-4 rounded-xl bg-card border border-border shadow-soft focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+                />
               </div>
-              <input
-                type="text"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                placeholder={t.enterLocation}
-                className="w-full pl-12 pr-4 py-4 rounded-xl bg-card border border-border shadow-soft focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+              <VoiceInput 
+                onResult={handleVoiceLocation} 
+                placeholder={t.speakLocation}
               />
             </div>
           </div>
