@@ -30,6 +30,13 @@ interface Translations {
   goHome: string;
   back: string;
   jobDetails: string;
+  // Voice related
+  speakLocation: string;
+  speakToSearch: string;
+  listening: string;
+  tapToSpeak: string;
+  voiceSearch: string;
+  searchJobs: string;
 }
 
 const translations: Record<Language, Translations> = {
@@ -61,6 +68,12 @@ const translations: Record<Language, Translations> = {
     goHome: 'Go Home',
     back: 'Back',
     jobDetails: 'Job Details',
+    speakLocation: 'Speak location',
+    speakToSearch: 'Speak to search',
+    listening: 'Listening...',
+    tapToSpeak: 'Tap mic to speak',
+    voiceSearch: 'Voice Search',
+    searchJobs: 'Search jobs',
   },
   te: {
     selectLanguage: 'భాష ఎంచుకోండి',
@@ -90,6 +103,12 @@ const translations: Record<Language, Translations> = {
     goHome: 'హోమ్‌కి వెళ్ళండి',
     back: 'వెనుకకు',
     jobDetails: 'ఉద్యోగ వివరాలు',
+    speakLocation: 'ప్రదేశం చెప్పండి',
+    speakToSearch: 'వెతకడానికి మాట్లాడండి',
+    listening: 'వింటోంది...',
+    tapToSpeak: 'మాట్లాడడానికి నొక్కండి',
+    voiceSearch: 'వాయిస్ సెర్చ్',
+    searchJobs: 'ఉద్యోగాలు వెతకండి',
   },
   hi: {
     selectLanguage: 'भाषा चुनें',
@@ -119,6 +138,12 @@ const translations: Record<Language, Translations> = {
     goHome: 'होम जाएं',
     back: 'वापस',
     jobDetails: 'नौकरी विवरण',
+    speakLocation: 'स्थान बोलें',
+    speakToSearch: 'खोजने के लिए बोलें',
+    listening: 'सुन रहा है...',
+    tapToSpeak: 'बोलने के लिए टैप करें',
+    voiceSearch: 'वॉइस सर्च',
+    searchJobs: 'नौकरी खोजें',
   },
   ta: {
     selectLanguage: 'மொழி தேர்வு',
@@ -148,6 +173,12 @@ const translations: Record<Language, Translations> = {
     goHome: 'முகப்புக்கு செல்',
     back: 'பின்செல்',
     jobDetails: 'வேலை விவரங்கள்',
+    speakLocation: 'இடத்தைச் சொல்லுங்கள்',
+    speakToSearch: 'தேட பேசுங்கள்',
+    listening: 'கேட்கிறது...',
+    tapToSpeak: 'பேச தட்டவும்',
+    voiceSearch: 'குரல் தேடல்',
+    searchJobs: 'வேலைகளைத் தேடு',
   },
 };
 
