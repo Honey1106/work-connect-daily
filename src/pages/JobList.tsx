@@ -8,9 +8,12 @@ import { ChevronLeft, Clock, MapPin, Mic, Search, X } from 'lucide-react';
 
 export default function JobList() {
   const navigate = useNavigate();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [searchQuery, setSearchQuery] = useState('');
   const [showVoiceSearch, setShowVoiceSearch] = useState(false);
+
+  const getJobTypeLabel = (job: (typeof mockJobs)[number]) =>
+    job.typeTranslations?.[language] ?? job.type;
 
   const formatHours = (start: string, end: string) => {
     const startHour = parseInt(start.split(':')[0]);
@@ -22,8 +25,10 @@ export default function JobList() {
   const filteredJobs = mockJobs.filter((job) => {
     if (!searchQuery) return true;
     const query = searchQuery.toLowerCase();
+    const localizedType = getJobTypeLabel(job).toLowerCase();
     return (
       job.type.toLowerCase().includes(query) ||
+      localizedType.includes(query) ||
       job.location.toLowerCase().includes(query)
     );
   });
@@ -124,7 +129,7 @@ export default function JobList() {
                 {/* Content */}
                 <div className="flex-1 min-w-0">
                   <h3 className="font-semibold text-foreground mb-1">
-                    {job.type}
+                    {getJobTypeLabel(job)}
                   </h3>
                   <div className="flex items-center gap-3 text-sm text-muted-foreground">
                     <span className="flex items-center gap-1">

@@ -7,7 +7,7 @@ import { ChevronLeft, Clock, MapPin, Phone, IndianRupee } from 'lucide-react';
 export default function JobDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const job = mockJobs.find((j) => j.id === id);
 
@@ -30,6 +30,8 @@ export default function JobDetails() {
   const handleCall = () => {
     window.location.href = `tel:${job.employerPhone}`;
   };
+
+  const jobTypeLabel = job.typeTranslations?.[language] ?? job.type;
 
   return (
     <div className="min-h-screen pb-28">
@@ -55,7 +57,7 @@ export default function JobDetails() {
               <JobIcon icon={job.typeIcon} className="w-10 h-10 text-primary" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-foreground">{job.type}</h2>
+              <h2 className="text-2xl font-bold text-foreground">{jobTypeLabel}</h2>
               <p className="text-muted-foreground">{t.jobDetails}</p>
             </div>
           </div>

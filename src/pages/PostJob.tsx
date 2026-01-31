@@ -8,7 +8,7 @@ import { ChevronLeft, MapPin, IndianRupee, Clock, ChevronDown } from 'lucide-rea
 
 export default function PostJob() {
   const navigate = useNavigate();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const [jobType, setJobType] = useState('');
   const [wage, setWage] = useState('');
@@ -16,6 +16,9 @@ export default function PostJob() {
   const [endTime, setEndTime] = useState('17:00');
   const [location, setLocation] = useState('');
   const [showJobTypes, setShowJobTypes] = useState(false);
+
+  const getJobTypeLabel = (jobTypeOption: (typeof jobTypes)[number]) =>
+    jobTypeOption.translations?.[language] ?? jobTypeOption.label;
 
   const selectedJobType = jobTypes.find((jt) => jt.id === jobType);
 
@@ -73,7 +76,7 @@ export default function PostJob() {
                   <div className="icon-circle flex-shrink-0">
                     <JobIcon icon={selectedJobType.icon} className="w-5 h-5 text-primary" />
                   </div>
-                  <span className="flex-1 font-medium">{selectedJobType.label}</span>
+                  <span className="flex-1 font-medium">{getJobTypeLabel(selectedJobType)}</span>
                 </>
               ) : (
                 <span className="flex-1 text-muted-foreground">{t.selectJobType}</span>
@@ -99,7 +102,7 @@ export default function PostJob() {
                     }`}
                   >
                     <JobIcon icon={jt.icon} className="w-8 h-8 text-primary" />
-                    <span className="text-sm font-medium text-center">{jt.label}</span>
+                    <span className="text-sm font-medium text-center">{getJobTypeLabel(jt)}</span>
                   </button>
                 ))}
               </div>
