@@ -1,0 +1,1 @@
+This project keeps routes inline in src/server.js for simplicity.

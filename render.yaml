@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: work-connect-daily
+    env: node
+    plan: free
+    buildCommand: cd backend && npm ci
+    startCommand: node backend/src/server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: PORT
+        value: 5000
+      - key: DB_FILE
+        value: /var/data/app.sqlite
+      - key: OTP_TTL_SECONDS
+        value: 300
+      - key: OTP_DEV_RETURN_CODE
+        value: false
+    disk:
+      name: data
+      mountPath: /var/data
+      sizeGB: 1
